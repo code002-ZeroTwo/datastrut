@@ -5,8 +5,11 @@
 
 using namespace std;
 
-
 int prec(char a){
+	if(a=='(')
+	{
+		return 4;
+	}
    if(a=='$'){
       return 3;
    }
@@ -37,32 +40,32 @@ int main(){
       }
       else if(exp[i]==')'){
          while(op.top()!='('){
-            char e;
+         	char e;
             e=op.top();
             op.pop();
             po.push(e);
          }
-         op.pop();
-         
-
+        op.pop();
       }
       else{
          if(!op.empty()){
-            while(prec(op.top())>prec(exp[i]) && exp[i]!='('){
-               char i;
+            while(prec(op.top())>prec(exp[i]) && op.top()!='('){
+			   char i;
                i=op.top();
                op.pop();
                po.push(i);
-               if(op.empty()){
-                  break;
-               }
+               if(op.empty())
+        		{
+					break;
+				}
             }
             op.push(exp[i]);
          }
-         else{
+         else
+         {
             op.push(exp[i]);
-         }
-         
+		 }
+
       }
    }
    while(!op.empty()){
@@ -71,14 +74,13 @@ int main(){
       op.pop();
       po.push(temp);
    }
-   int j=0;
    while(!po.empty())
    {
       last+=po.top();
       po.pop();
    }
-   for(int i=last.length()-1;i>=0;i--){
-      cout<<last[i];
+   for(int j=last.length()-1;j>=0;j--){
+      cout<<last[j];
    }
    return 0;
 }

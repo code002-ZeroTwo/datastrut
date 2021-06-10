@@ -1,5 +1,7 @@
 #include<iostream>
 #include<stack>
+#include<ctype.h>
+#include<cstring>
 
 using namespace std;
 
@@ -20,7 +22,7 @@ int prec(char a){
 int main(){
    stack<int> op;
    stack<int> po;
-   string exp;
+   string exp,last;
    int a;
    cout<<"enter expression: "<<endl;
    cin>>exp;
@@ -37,12 +39,11 @@ int main(){
          while(e!='('){
             e=op.top();
             op.pop();
+            break;
             po.push(e);
 
          }
-         if(op.top()=='('){
-            op.pop();
-         }
+         
 
       }
       else{
@@ -52,9 +53,10 @@ int main(){
                i=op.top();
                op.pop();
                po.push(i);
+               op.push(exp[i]);
             }
-            op.push(exp[i]);
          }
+         op.push(exp[i]);
       }
    }
    while(!op.empty()){
@@ -63,6 +65,13 @@ int main(){
       op.pop();
       po.push(temp);
    }
+   while(a>=0){
+      last[a]=po.top();
+      po.pop();
+      a--;
+   }
+   for(int i=0;i<a;i++){
+      cout<<last[a];
+   }
    return 0;
-
 }

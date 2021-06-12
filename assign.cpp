@@ -48,7 +48,7 @@ int main(){
       }
       else{
          if(!op.empty()){
-            while(prec(op.top())>prec(exp[i]) && exp[i]!='('){
+            while(prec(op.top())>prec(exp[i])){
                char i;
                i=op.top();
                op.pop();
@@ -77,8 +77,10 @@ int main(){
       last+=po.top();
       po.pop();
    }
+   cout<<"postfix expression is :";
    for(int i=last.length()-1;i>=0;i--){
       cout<<last[i];
    }
+   cout<<endl;
    return 0;
 }
